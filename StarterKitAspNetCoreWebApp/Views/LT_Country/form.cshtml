@@ -1,0 +1,286 @@
+@model LT_Country
+<html style="height: auto;">
+    
+    
+    
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 3 | DataTables</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    @* <link rel="stylesheet" type="text/css" href="~/AdminLTE/plugins/datatablesAlhafi/datatables.min.css"/> *@
+    @*source https://quickadminpanel.com/blog/how-to-customize-datatables-6-most-requested-tips/*@
+    @*https://datatables.net/plug-ins/i18n/Arabic*@
+
+    <link rel="stylesheet" href="~/AdminLTE/plugins/sweetalert2/sweetalert2.min.css" />
+
+</head>
+
+<style>
+    #countriesGridMap {
+        text-align: center;
+        border: 1px solid #ccc;
+    }
+
+        #countriesGridMap td {
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+
+    #footerExport td {
+        cursor: pointer;
+        text-align: center;
+        border: 1px solid #ccc;
+        border: none;
+    }
+
+    .grow:hover {
+        -webkit-transform: scale(1.3);
+        -ms-transform: scale(1.3);
+        transform: scale(1.3);
+    }
+</style>
+
+
+<body class="sidebar-mini" style="height: auto;">
+<div class="wrapper">
+  <!-- Navbar -->
+  
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper" style="min-height: 1203.08px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h2>Add/Edit</h2>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item"><a href="javascript:history.back()">country</a></li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-12">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Country Form</h3>
+            </div>
+            <form role="form">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      @Html.LabelFor(m => m.Country_Code)
+                      @Html.TextBoxFor(m => m.Country_Code, new { @class = "form-control", disabled=true, @readonly=true, @placeholder="System will generate for you." })
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      @Html.LabelFor(m => m.CountryNameAr)
+                      @Html.TextBoxFor(m => m.CountryNameAr, new { @class = "form-control"})
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      @Html.LabelFor(m => m.CountryNameEn)
+                      @Html.TextBoxFor(m => m.CountryNameEn, new { @class = "form-control"})
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      @Html.LabelFor(m => m.NationalityDescAr)
+                      @Html.TextBoxFor(m => m.NationalityDescAr, new { @class = "form-control"})
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      @Html.LabelFor(m => m.NationalityDescEn)
+                      @Html.TextBoxFor(m => m.NationalityDescEn, new { @class = "form-control"})
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      @Html.LabelFor(m => m.DialCode)
+                      @Html.TextBoxFor(m => m.DialCode, new { @class = "form-control"})
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      @Html.LabelFor(m => m.IACOCode)
+                      @Html.TextBoxFor(m => m.IACOCode, new { @class = "form-control"})
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      @Html.LabelFor(m => m.Alpha2Code)
+                      @Html.TextBoxFor(m => m.Alpha2Code, new { @class = "form-control"})
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      @Html.LabelFor(m => m.Alpha3Code)
+                      @Html.TextBoxFor(m => m.Alpha3Code, new { @class = "form-control"})
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      @Html.LabelFor(m => m.Capital)
+                      @Html.TextBoxFor(m => m.Capital, new { @class = "form-control"})
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      @Html.LabelFor(m => m.Region_Code)
+                      @Html.TextBoxFor(m => m.Region_Code, new { @class = "form-control"})
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      @Html.LabelFor(m => m.SubRegion_Code)
+                      @Html.TextBoxFor(m => m.SubRegion_Code, new { @class = "form-control"})
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-check">
+                      @Html.CheckBoxFor(m=> m.IsGCC, new{@class="form-check-input"})
+                      @Html.LabelFor(m => m.IsGCC, new{ @class="form-check-label"})
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-check">
+                      @Html.CheckBoxFor(m=> m.isActive.Value, new{@class="form-check-input"})
+                      @Html.LabelFor(m => m.isActive, new{ @class="form-check-label"})
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <button type="button" class="btn btn-primary save-button" >Save</button>
+                @if(string.IsNullOrEmpty(Model.Country_Code)){
+                  <button type="button" class="btn btn-secondary return-button" >Return to List</button>
+                }
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <!-- Control Sidebar -->
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+@section scripts{
+  <script src="~/AdminLTE/plugins/sweetalert2/sweetalert2.all.min.js"></script>
+  <script>
+
+    function mapCountryForm(){
+      return {
+        Country_Code: $("#Country_Code").val().trim(),
+        CountryNameAr: $("#CountryNameAr").val().trim(),
+        CountryNameEn: $("#CountryNameEn").val().trim(),
+        NationalityDescAr: $("#NationalityDescAr").val().trim(),
+        NationalityDescEn: $("#NationalityDescEn").val().trim(),
+        DialCode: $("#DialCode").val().trim(),
+        IACOCode: $("#IACOCode").val().trim(),
+        Alpha2Code: $("#Alpha2Code").val().trim(),
+        Alpha3Code: $("#Alpha3Code").val().trim(),
+        Capital:$("#Capital").val().trim(),
+        Region_Code: $("#Region_Code").val().trim(),
+        SubRegion_Code: $("#SubRegion_Code").val().trim(),
+        IsGCC: $("#IsGCC").is(":checked"),
+        isActive: $("#isActive_Value").is(":checked")
+      };
+
+    }
+    $(document).ready(function(){
+      
+
+      $(".save-button").click(function(){
+        if($("#Country_Code").val().trim() === ''){
+          // New Country
+          $.ajax({
+            url:"../../api/AddCountry",
+            data: mapCountryForm(),
+            type: "POST",
+            success: function(result){
+              Swal.fire({
+                title: 'Success!',
+                text: 'Saved New Country',
+                icon: 'success',
+                confirmButtonText: 'Ok'
+              }).then(function(){
+                window.location.replace('@Url.Action("Index")');
+              });
+            },
+            error: function(x,y,z){
+              console.log(x,y,z);
+              Swal.fire({
+                title: 'Error!',
+                text: 'Nothing changed',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+              });
+            }
+          });
+        }
+        else{
+          // Existing Country
+          $.ajax({
+            url:"../../api/UpdateCountry",
+            data: mapCountryForm(),
+            type: "PUT",
+            success: function(result){
+              Swal.fire({
+                title: 'Success!',
+                text: 'Updated Country Information',
+                icon: 'success',
+                confirmButtonText: 'Ok'
+              }).then(function(){
+                window.location.replace('@Url.Action("Index")');
+              });
+            },
+            error: function(x,y,z){
+              console.log(x,y,z);
+              Swal.fire({
+                title: 'Error!',
+                text: 'Nothing changed',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+              });
+            }
+          });
+        }
+
+      });
+
+      $(".return-button").click(function(){
+        window.location.href = '@Url.Action("Index")';
+      });
+
+    });
+  </script>
+
+}
+</body>
+</html>

@@ -1,0 +1,460 @@
+@{
+    ViewBag.Title = "Country";
+   //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html style="height: auto;">
+    
+    
+    
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 3 | DataTables</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    @* <link rel="stylesheet" type="text/css" href="~/AdminLTE/plugins/datatablesAlhafi/datatables.min.css"/> *@
+    @*source https://quickadminpanel.com/blog/how-to-customize-datatables-6-most-requested-tips/*@
+    @*https://datatables.net/plug-ins/i18n/Arabic*@
+
+      <link rel="stylesheet" href="~/AdminLTE/plugins/sweetalert2/sweetalert2.min.css" />
+
+</head>
+
+<style>
+    #countriesGridMap {
+        text-align: center;
+        border: 1px solid #ccc;
+    }
+
+        #countriesGridMap td {
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+
+    #footerExport td {
+        cursor: pointer;
+        text-align: center;
+        border: 1px solid #ccc;
+        border: none;
+    }
+
+    .grow:hover {
+        -webkit-transform: scale(1.3);
+        -ms-transform: scale(1.3);
+        transform: scale(1.3);
+    }
+</style>
+
+
+<body class="sidebar-mini" style="height: auto;">
+<div class="wrapper">
+  <!-- Navbar -->
+  
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper" style="min-height: 1203.08px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>List of Countries</h1>
+
+
+
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item"><a href="#">country</a></li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-12">
+          
+          <!-- /.card -->
+
+          <div class="card">
+            @* <div class="card-header">
+              <h3 class="card-title">DataTable with default features</h3>
+
+            </div> *@
+            <!-- /.card-header -->
+            <div class="card-body">
+              <div id="countriesGridMap_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                
+                <div class="row">
+                  
+                  
+                  <div class="col-sm-12">
+       
+
+        <table id="countriesGridMap" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="countriesGridMap_info">
+               
+               
+                <thead>
+                <tr role="row">
+				<th class="sorting_asc" tabindex="0" aria-controls="countriesGridMap" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Country/Capital</th>
+				<th class="sorting" tabindex="0" aria-controls="countriesGridMap" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Nationality English/Arabic</th>
+				<th class="sorting" tabindex="0" aria-controls="countriesGridMap" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">IACOCode</th>
+				<th class="sorting" tabindex="0" aria-controls="countriesGridMap" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Alpha2Code</th>
+				<th class="sorting" tabindex="0" aria-controls="countriesGridMap" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Alpha3Code</th>
+				<th class="sorting" tabindex="0" aria-controls="countriesGridMap" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">is GCC?</th>
+				<th>Action</th>
+				</tr>
+                </thead>
+
+                
+                <tbody></tbody>
+                
+                
+
+
+                @* <tfoot>
+                <tr>
+				<th rowspan="1" colspan="1">Country</th>
+				<th rowspan="1" colspan="1">Nationality English/Arabic</th>
+				<th rowspan="1" colspan="1">IACOCode</th>
+				<th rowspan="1" colspan="1">Alpha2Code</th>
+				<th rowspan="1" colspan="1">Alpha3Code</th>
+				<th rowspan="1" colspan="2">is GCC?</th>
+				</tr>
+                </tfoot> *@
+              </table></div></div>
+
+
+              <div id="summary">
+            <div>
+            </div>
+        </div>
+
+       
+
+             
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  
+
+  <!-- Control Sidebar -->
+  
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+
+
+
+
+@section scripts
+{
+
+<script src="~/AdminLTE/plugins/sweetalert2/sweetalert2.all.min.js"></script>
+
+<!-- DataTables it in layout-->
+
+@* <script type="text/javascript" src="~/AdminLTE/plugins/datatablesAlhafi/datatables.min.js"></script>
+<script type="text/javascript" src="~/AdminLTE/plugins/datatablesAlhafi/pdfmake.min.js"></script>
+<script type="text/javascript" src="~/AdminLTE/plugins/datatablesAlhafi/vfs_fonts.js"></script> *@
+
+
+
+
+
+<script type="text/javascript">
+        var editor; // use a global for the submit and return data rendering in the examples
+        var table;
+        $(document).ready(function () {
+
+            @* pdfMake.fonts = {
+                    Arial: {
+                            normal: 'arial.ttf',
+                            bold: 'arialbd.ttf',
+                            italics: 'ariali.ttf',
+                            bolditalics: 'arialbi.ttf'
+                    }
+            }; *@
+
+            table = $('#countriesGridMap').DataTable(
+                {
+                    ajax:
+                     {
+                        "url": '../api/Countries',
+                        "dataType": 'json',
+                        "type": 'GET',
+                        dataSrc:''
+                    },
+                    dom: 'lBfrtip<"actions">',
+                buttons: [
+                    {
+                        text: 'Add',
+                        action: function ( e, dt, node, config ) {
+                            window.location.href = '@Url.Action("Form")';
+                        }
+                    },
+                    {
+                        extend: 'copy',
+                        text: window.copyButtonTrans,
+                        exportOptions: {
+                            columns: [1, 2, 3, 4, 5]
+                        }
+                    },
+                    
+                    {
+                        "extend": "csv",
+                       // "text": "Export as CSV",
+                        text: window.pdfButtonTrans,
+                        "filename": "List_of_Countries",
+                         "title": 'List of Countries',
+                        "className": "btn btn-green",
+                        "charset": "utf-8",
+                        "bom": "true",
+                         exportOptions: {
+                            //columns: ':visible'
+                            columns: [1, 2, 3, 4, 5]
+                        } ,
+                        init: function(api, node, config) {
+                            $(node).removeClass("btn-default");
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        text: window.excelButtonTrans,
+                          "filename": "List_of_Countries",
+                           "title": 'List of Countries',
+                        exportOptions: {
+                            columns: [1, 2, 3, 4, 5]
+                        }
+                    },
+                    {
+                       
+
+                        "extend": "pdf",
+                        //"text": "Export as PDF",
+                        text: window.pdfButtonTrans,
+                        "filename": "List_of_Countries",
+                         "title": 'List of Countries',
+                        "className": "btn btn-green",
+                        "charset": "utf-8",                                           
+                       // "font": 'Arial',
+                        "bom": "true",
+                        exportOptions: {
+                            //columns: ':visible'
+                            columns: [1, 2, 3, 4, 5]
+                        } ,
+                        init: function(api, node, config) {
+                            $(node).removeClass("btn-default");
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        text: window.printButtonTrans,
+                        "filename": "List_of_Countries",
+                         "title": 'List of Countries',
+                        "className": "btn btn-green",
+                        "charset": "utf-8",
+                       // "font": 'Arial',
+                        "bom": "true",
+                        exportOptions: {
+                            //columns: ':visible'
+                            columns: [1, 2, 3, 4, 5]
+                        } ,
+                    },
+                    {
+                        extend: 'colvis',
+                        text: window.colvisButtonTrans,
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                ],
+                    "paging": true,
+                    //"lengthMenu": [[10, 25, 50, 100, 500], [10, 25, 50, 100,  "All"]],     // page length options
+                    
+                    lengthMenu: [[10, 25, 50,100,200,300,400], [10, 25, 50,100,200,300,400]],
+                               
+                    
+                    "pageLength": 5,   // default page length
+                    "pagingType": "full_numbers",      // pagination related buttons
+                    scrollY:        "400px",
+        scrollX:        true,
+        scrollCollapse: true,
+                     "width": '100%',
+                     
+                    "language": {
+                        "emptyTable": "There are no Country at present.",
+                        "zeroRecords": "There were no matching Countries found."
+                    },
+                    "searching": true,
+                    "ordering": true,
+                    "responsive": true,
+                   
+                     
+                    
+
+                     columns: [
+                        {
+
+                            className: "text-center" ,
+                           // width: "30%",
+                           autoWidth: true,
+                            data: null, render: function ( data, type, row ) {
+                                // Combine the country & capital into a single table field
+                                return  "<a href='/LookUp/Country/Form?countryCode=" + data.country_Code + "'>" + data.countryNameEn + ' / ' + data.capital + "</a>";;
+                            } 
+                            
+                            },
+
+                        {
+                            className: "text-center" ,
+                           //  width: "30%",
+                           autoWidth: true,
+                            data: null, render: function ( data, type, row ) {
+                                // Combine the Nationality English & Arabic into a single table field
+                                return data.nationalityDescEn + ' / ' + data.nationalityDescAr;
+                                //  return data.nationalityDescEn;
+                            } },
+
+
+                        {
+
+                            data: "iacoCode", name: "iacoCode" , className: "text-center"
+                        },
+                        {
+
+                            data: "alpha2Code", name: "alpha2Code" , className: "text-center"
+                        },
+                        {
+
+                            data: "alpha3Code", name: "alpha3Code" , className: "text-center"
+                        },
+                        {
+                            // 'targets': 5, //fifth column
+                            //data: "isGCC",
+                            searchable:false,
+                            orderable:true,
+                            // "visible": false,
+                            className: "text-center",
+
+                            data: "isGCC", name: "isGCC", render: function ( data, type, row ) {
+                                if (data === true) {
+                                    return '<input type=\"checkbox\" disabled checked value="' + data + '">'  + data ;
+                                } else {
+                                    return '<input type=\"checkbox\" disabled value="' + data + '">'  + data ;
+                                }
+
+
+
+                            }
+
+
+                        },
+
+                        {
+                            searchable:false,
+                            orderable:false,
+                            className: "text-center",
+                             width: "10%",
+
+                            data: "country_Code",
+                            render: function (data) {
+
+                                @* font https://fontawesome.com/ such as  class='far fa-trash-alt *@
+                                return "<button  class='btn btn-danger js-delete' data-template-id=" + data + "><span class='fas fa-trash'></span></button>" +
+
+                                    "<a href='/LookUp/Country/Form?countryCode=" + data + "' class='btn btn-info js-edit' data-template-id=" + data + " > <span class='fas fa-edit'></span></a >"; 
+                                
+                                }
+                        }
+                    ] ,
+
+                    
+
+
+
+                });    //end of datatable
+
+
+            $("#countriesGridMap").on("click", ".js-delete", function () {
+                var button = $(this);
+                $tr = $(this).closest('tr');
+                const swalConfirm = Swal.mixin({
+                    customClass: {
+                        confirmButton: 'btn btn-success',
+                        cancelButton: 'btn btn-danger'
+                    },
+                    buttonsStyling: false
+                });
+                swalConfirm.fire({
+                    title: "Delete Country",
+                    text: "Are you sure?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Yes Delete It",
+                    cancelButtonText: "Cancel",
+                    buttonsStyling: false
+                }).then(function (data) {
+                    if (data.value === true) {
+                        $.ajax({
+                            url:"../../api/DeletedCountry",
+                            data: {Country_Code: $(button).data("template-id")},
+                            type: "DELETE",
+                            success: function(result){
+                                Swal.fire({
+                                    title: 'Success!',
+                                    text: 'Country has been Deleted',
+                                    icon: 'success',
+                                    confirmButtonText: 'Ok'
+                                }).then(function(){
+                                    table.row($tr).remove().draw();
+                                });
+                            },
+                            error: function(x,y,z){
+                                console.log(x,y,z);
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: 'Nothing changed',
+                                    icon: 'error',
+                                    confirmButtonText: 'Ok'
+                                });
+                            }
+                        });
+                        
+                    }
+                }).catch(swal.noop);
+            });
+            if ('@TempData["message"]' == "Data saved" || '@TempData["message"]' == "Data Updated") {
+                toastr.success("Record is saved Successfully?")
+            }
+
+             
+        });  //end of document
+
+    </script>
+
+
+}
+</body>
+</html>

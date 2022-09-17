@@ -1,0 +1,26 @@
+﻿CREATE TABLE [dbo].[LT_Country] (
+    [Country_Code]      NVARCHAR (12)  NOT NULL,
+    [Id]                INT            IDENTITY (1, 1) NOT NULL,
+    [CountryNameEn]     NVARCHAR (50)  NOT NULL,
+    [CountryNameAr]     NVARCHAR (50)  NULL,
+    [Capital]           NVARCHAR (50)  NULL,
+    [NationalityDescAr] NVARCHAR (50)  NULL,
+    [NationalityDescEn] NVARCHAR (50)  NULL,
+    [IsGCC]             BIT            NOT NULL,
+    [IACOCode]          INT            NOT NULL,
+    [Alpha2Code]        NVARCHAR (5)   NULL,
+    [Alpha3Code]        NVARCHAR (5)   NULL,
+    [Region]            NVARCHAR (50)  NULL,
+    [SubRegion]         NVARCHAR (50)  NULL,
+    [Region_Code]       NVARCHAR (8)   NULL,
+    [SubRegion_Code]    NVARCHAR (8)   NULL,
+    [DialCode]          NVARCHAR (8)   NULL,
+    [CreatedBy]         NVARCHAR (100) DEFAULT ('EF Migration') NULL,
+    [CreatedOn]         DATETIME2 (7)  DEFAULT (getutcdate()) NULL,
+    [ModifiedBy]        NVARCHAR (100) DEFAULT ('EF Migration') NULL,
+    [ModifiedOn]        DATETIME2 (7)  DEFAULT (getutcdate()) NULL,
+    [IPAddress]         NVARCHAR (15)  DEFAULT ('::1') NULL,
+    [isActive]          BIT            DEFAULT ((1)) NULL,
+    CONSTRAINT [PK_LT_Country] PRIMARY KEY CLUSTERED ([Country_Code] ASC)
+);
+

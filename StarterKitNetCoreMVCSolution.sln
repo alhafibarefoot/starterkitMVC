@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarterKitAspNetCoreWebApp", "StarterKitAspNetCoreWebApp\StarterKitAspNetCoreWebApp.csproj", "{3319DC11-79BE-409C-8BBF-8A941AEAEBF6}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "StarterKitSqlServerDatabseProject", "StarterKitSqlServerDatabseProject\StarterKitSqlServerDatabseProject.sqlproj", "{8B83DB3A-4859-4E07-85F7-5765704F0D82}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3319DC11-79BE-409C-8BBF-8A941AEAEBF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3319DC11-79BE-409C-8BBF-8A941AEAEBF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3319DC11-79BE-409C-8BBF-8A941AEAEBF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3319DC11-79BE-409C-8BBF-8A941AEAEBF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B83DB3A-4859-4E07-85F7-5765704F0D82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B83DB3A-4859-4E07-85F7-5765704F0D82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B83DB3A-4859-4E07-85F7-5765704F0D82}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8B83DB3A-4859-4E07-85F7-5765704F0D82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B83DB3A-4859-4E07-85F7-5765704F0D82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B83DB3A-4859-4E07-85F7-5765704F0D82}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BD3D4457-C0A1-4370-AB10-42BCD68CF4E8}
+	EndGlobalSection
+EndGlobal
